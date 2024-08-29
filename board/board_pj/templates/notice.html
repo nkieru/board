@@ -1,0 +1,29 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_tags %}
+
+{% block title %}
+BOARD_NOTICE_ {{ notice.title }}
+{% endblock title %}
+
+{% block content %}
+<h1>Notice: {{ notice.title }}</h1>
+<h5>{{ notice.get_category_display }}</h5>
+<h5>{{ notice.date_nc }}</h5>
+<h5>{{ notice.author_nc }}</h5>
+
+<table>
+        <tr>
+            <td>{{ notice.content|safe }}</td>
+        </tr>
+    </table>
+
+<form action="feedback/create">
+    <input type="submit" value="Add feedback" />
+</form>
+<br>
+<form action="update/{{ notice.pk }}">
+    <input type="submit" value="Update notice" />
+</form>
+
+{% endblock content %}

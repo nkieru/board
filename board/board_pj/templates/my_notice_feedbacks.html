@@ -1,0 +1,49 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% load custom_tags %}
+
+{% block title %}
+FEEDBACK FOR USER: {{ request.user }}
+{% endblock title %}
+
+
+{% block content %}
+
+<h1>Feedbacks for user: {{ request.user }}</h1>
+
+ <form action="" method="get">
+        {{ filterset.form.as_p }}
+        <input type="submit" value=Search />
+ </form>
+
+{% if filterset.qs %}
+        <table cellpadding="5">
+            <tr>
+                <td><span style="font-size: 15px;">Text</td>
+                <td><span style="font-size: 15px;">Notice</td>
+                <td><span style="font-size: 15px;">Date</td>
+                <td><span style="font-size: 15px;">Author</td>
+                <td><span style="font-size: 15px;">Accept</td>
+            </tr>
+            {% for feedback in filterset.qs %}
+            <tr>
+                <td><a href="feedback/{{ feedback.id }}" style="font-size: 25px;">{{ feedback.text|truncatechars:40 }}</a>
+            </td>
+                <td><span style="font-size: 12px;">{{ feedback.notice_fb }}</td>
+                <td><span style="font-size: 12px;">{{ feedback.date_fb|date:'d.M.Y'}}</td>
+                <td><span style="font-size: 10px;">{{ feedback.author_fb }}</td>
+                {% if feedback.accept %}
+                <td><span style="color:#8ee036;font-size:10px">Accepted</td>
+                {% else %}
+                <td><span style="color:#debd1c;font-size:10px">To accept</td>
+                 {% endif %}
+           </tr>
+             {% endfor %}
+             </table>
+
+{% else %}
+    <h2>No feedbacks</h2>
+    {% endif %}
+
+{% endblock content %}

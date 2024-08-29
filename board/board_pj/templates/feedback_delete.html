@@ -1,0 +1,18 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+DELETE FEEDBACK
+{% endblock title %}
+
+{% block content %}
+
+<h1>Delete feedback</h1>
+<hr>
+
+<form action='' method='post'>
+    {% csrf_token %}
+    <p>"Delete feedback": {{ object.id }}"?</p>
+    <input type='submit' value=Delete />
+</form>
+
+{% endblock content %}

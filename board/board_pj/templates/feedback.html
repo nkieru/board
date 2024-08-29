@@ -1,0 +1,36 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+BOARD NOTICE FEEDBACK {{ feedback.pk }}
+{% endblock title %}
+
+{% block content %}
+<h1>Feedback: {{ feedback.pk }}</h1>
+    <table cellpadding="5">
+            <tr>
+                <td><span style="font-size: 15px;">Text</td>
+                <td><span style="font-size: 15px;">Notice</td>
+                <td><span style="font-size: 15px;">Date</td>
+                <td><span style="font-size: 15px;">Author</td>
+            </tr>
+         <tr>
+                <td><span style="font-size: 15px;">{{ feedback.text }}</td>
+                <td><span style="font-size: 15px;">{{ feedback.notice_fb }}</td>
+                <td><span style="font-size: 15px;">{{feedback.date_fb}}</td>
+                <td><span style="font-size: 15px;">{{feedback.author_fb}}</td>
+            </tr>
+    </table>
+
+<form action="{{ feedback.pk }}/delete">
+    <input type="submit" value="Delete feedback" />
+</form>
+
+<br>
+
+{% if feedback.accept is False %}
+    <form action="{% url 'accept_feedback' pk=feedback.id %}">
+    <input type="submit" value="Accept feedback" />
+    </form>
+{%endif%}
+
+{% endblock content %}

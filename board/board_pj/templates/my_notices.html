@@ -1,0 +1,48 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_tags %}
+
+{% block title %}
+MY NOTICES
+{% endblock title %}
+
+{% block content %}
+
+<h1>My notices</h1>
+    {% if my_notices %}
+        <table cellpadding="5">
+            <tr>
+                <td><span style="font-size: 15px;">Title</td>
+                <td><span style="font-size: 15px;">Date</td>
+                <td><span style="font-size: 15px;">Author</td>
+            </tr>
+
+        {% for notice in my_notices %}
+            <tr>
+                <td><a href="/notices/{{ notice.id }}" style="font-size: 25px;">{{ notice.title|truncatechars:40 }}</a>
+            </td>
+                <td><span style="font-size: 12px;">{{ notice.date_nc|date:'d.M.Y'}}</td>
+                <td><span style="font-size: 10px;">{{ notice.author_nc }}</td>
+           </tr>
+        {% endfor %}
+             </table>
+
+    {% else %}
+    <h2>No notices</h2>
+    {% endif %}
+
+    {% if page_obj.has_previous %}
+        <a href="?{% url_replace page=1 %}">1</a>
+        {% if page_obj.previous_page_number != 1 %}
+            <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+    {% endif %}
+        {% endif %}
+    {{ page_obj.number }}
+    {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+    {% endif %}
+
+{% endblock content %}

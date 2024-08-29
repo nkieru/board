@@ -1,0 +1,16 @@
+{% extends "flatpages/sign.html" %}
+
+{% block content %}
+<h2>Authorized user page: {{request.user.username}}</h2>
+<div> There may contain personal information for each user </div>
+
+<form action="/notices">
+        <input type="submit" value="Go to notices" />
+</form>
+<br>
+<form action="{% url 'logout' %}" method='post'>
+        {% csrf_token %}
+        <input type='submit' value=Exit>
+</form>
+
+{% endblock %}

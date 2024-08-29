@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message</title>
+</head>
+<body>
+<h2>Weekly notices: {{ notices_count }}</h2>
+    <ul>
+        {% for notice in notices %}
+            <li><a href="{{ link }}{{ notice.get_absolute_url }}">{{ notice.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
